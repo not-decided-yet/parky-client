@@ -10,10 +10,16 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-function initializeFirebase(serviceWorkerRegistration: ServiceWorkerRegistration): Promise<string> {
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRegistration) {
   const message = firebase.messaging();
-  return message.getToken({serviceWorkerRegistration});
+  const result = await Notification.requestPermission();
+  if(result === 'denied' || result === 'default') {
+    return '';
+  } else {
+    return await message.getToken({serviceWorkerRegistration});
+  }
 }
 
-export default initializeFirebase;
+export default initializeNotification;
