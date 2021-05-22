@@ -17,7 +17,16 @@ async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRe
   const messaging = firebase.messaging();
   const token = await messaging.getToken({serviceWorkerRegistration});
   console.log("token", token);
-  messaging.onMessage((payload) => console.log("onMessage", payload));
+  navigator.clipboard.writeText(token);
+  alert(`'무야호 ${token}'`);
+  messaging.onMessage((payload) => {
+    console.log("onMessage", payload);
+    serviceWorkerRegistration.showNotification(payload.notification.title,
+      {
+        body: payload.notification.body,
+        icon: payload.notification.image,
+      });
+  });
   return token;
 }
 

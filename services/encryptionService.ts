@@ -23,4 +23,4 @@ export async function encrypt(
 
 // --- --- --- ---
 
-export async function decrypt()
+export async function decrypt() {}

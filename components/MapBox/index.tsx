@@ -35,7 +35,7 @@ const createMap = (defaultLocation: Coordinate) => {
   ].forEach(({ name: imageName, ...options }) => {
     map.loadImage(
       `/img/${imageName}.png`,
-      (err, image) => image && map.addImage(imageName, image, options)
+      (err, image) => image && map.addImage(imageName, image, {pixelRatio: 2})
     );
   });
 

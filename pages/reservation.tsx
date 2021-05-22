@@ -5,7 +5,7 @@ export default function Reservation() {
   return <div>
     에니메이션 (선택)
     주차 전 상태,
-    <- 푸시가 있음 ->
+    푸시가 있음
     주차 후 상태
   </div>;
 }
