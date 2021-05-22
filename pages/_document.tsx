@@ -16,51 +16,48 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="application-name" content="PWA App" />
+          <link rel="preconnect" href="https://fonts.gstatic.com"/>
+          <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
+          <meta name="application-name" content="Parky" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
             name="apple-mobile-web-app-status-bar-style"
             content="default"
           />
-          <meta name="apple-mobile-web-app-title" content="PWA App" />
-          <meta name="description" content="Best PWA App in the world" />
+          <meta name="apple-mobile-web-app-title" content="Parky" />
+          <meta name="description" content="It's a Parky day!" />
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta
             name="msapplication-config"
             content="/static/icons/browserconfig.xml"
           />
-          <meta name="msapplication-TileColor" content="#2B5797" />
+          <meta name="msapplication-TileColor" content="#4560FF" />
           <meta name="msapplication-tap-highlight" content="no" />
-          <meta name="theme-color" content="#000000" />
+          <meta name="theme-color" content="#4560FF" />
 
           <link rel="manifest" href="/static/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-          />
 
           <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content="https://yourdomain.com" />
-          <meta name="twitter:title" content="PWA App" />
+          <meta name="twitter:url" content="https://parky.ml" />
+          <meta name="twitter:title" content="Parky" />
           <meta
             name="twitter:description"
-            content="Best PWA App in the world"
+            content="It's a Parky day!"
           />
           <meta
             name="twitter:image"
-            content="https://yourdomain.com/static/icons/android-chrome-192x192.png"
+            content="https://parky.ml/static/icons/android-chrome-192x192.png"
           />
-          <meta name="twitter:creator" content="@DavidWShadow" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="PWA App" />
-          <meta property="og:description" content="Best PWA App in the world" />
-          <meta property="og:site_name" content="PWA App" />
-          <meta property="og:url" content="https://yourdomain.com" />
+          <meta property="og:title" content="Parky" />
+          <meta property="og:description" content="It's a Parky day!" />
+          <meta property="og:site_name" content="Parky" />
+          <meta property="og:url" content="https://parky.ml" />
           <meta
             property="og:image"
-            content="https://yourdomain.com/static/icons/apple-touch-icon.png"
+            content="https://parky.ml/static/icons/apple-touch-icon.png"
           />
 
           <link
