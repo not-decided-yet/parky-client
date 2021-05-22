@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useRouter } from "next/dist/client/router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Splash } from "../components/Splash";
 import { useAppContext } from "../context/state";
 import initializeNotification from "../utils/fcm";
@@ -65,10 +65,9 @@ export default function Index() {
   });
 
   useEffect(() => {
-    Promise.all([
-      requestGeolocation(navigator, context?.setLocation),
-      requestFCMPush(navigator, setPushConfirmation),
-    ]).then(() => push("/main"));
+    setTimeout(() => {
+      push("/main");
+    }, 3000);
   }, []);
 
   return (

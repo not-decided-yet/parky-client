@@ -1,10 +1,13 @@
 import { ParkingLotData } from "../../utils/types";
 import ParkingLot from "../ParkingLot";
 import Sheet from "react-modal-sheet";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthFlow from "../AuthFlow";
 import ParkingLotDetail from "../ParkingLotDetail";
 
+import dynamic from "next/dynamic";
+
+const SearchButton = dynamic(() => import("../SearchButton"), { ssr: false });
 export interface MainBackDropProps {
   className?: string;
   items: ParkingLotData[];
@@ -24,6 +27,7 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
 }) => {
   const [maxHeight, setMaxHeight] = useState<number>(600);
   const [minHeight, setMinHeight] = useState<number>(240);
+  const [isSearchExpanded, setSearchExpanded] = useState<boolean>(false);
 
   useEffect(() => {
     switch (mode) {
@@ -47,6 +51,14 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
       onClose={() => {}}
       snapPoints={[maxHeight, minHeight]}
       initialSnap={1}
+      onSnap={(snapIndex) => {
+        if (mode !== BackdropModes.browsing) {
+          return;
+        }
+        if (snapIndex === 0) {
+          setSearchExpanded(true);
+        } else setSearchExpanded(false);
+      }}
       className={`parking-lot-list ${className}`}
     >
       <Sheet.Container>
@@ -57,17 +69,13 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
               {items.map((data, index) => (
                 <ParkingLot key={index} {...data} isNearest={index == 0} />
               ))}
+              <SearchButton isExpanded={isSearchExpanded} />
             </>
           )}
-          {
-            mode === BackdropModes.auth && <AuthFlow />
-          }
-          {
-            mode === BackdropModes.detail && <ParkingLotDetail />
-          }
+          {mode === BackdropModes.auth && <AuthFlow />}
+          {mode === BackdropModes.detail && <ParkingLotDetail />}
         </Sheet.Content>
       </Sheet.Container>
-
       <Sheet.Backdrop />
     </Sheet>
   );

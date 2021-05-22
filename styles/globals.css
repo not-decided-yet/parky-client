@@ -367,6 +367,7 @@ body {
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+  text-rendering: optimizeLegibility;
 
   @apply text-black bg-white font-sans font-bold;
 }
@@ -398,4 +399,15 @@ html {
 
 .parking-lot-list {
   pointer-events: none !important;
+}
+
+#search-button-wrapper {
+  position: fixed;
+  right: 1rem;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 9999999;
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
 }

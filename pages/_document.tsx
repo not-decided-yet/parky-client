@@ -21,6 +21,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap"
             rel="stylesheet"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Material+Icons"
+            rel="stylesheet"
+          />
           <meta name="application-name" content="Parky" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta
