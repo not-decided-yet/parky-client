@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
 import { Splash } from "../components/Splash";
@@ -31,44 +32,37 @@ const requestGeolocation = (
       })
   );
 
-// TODO: not working... (want to interrupt when permissionStatus.state === "prompt")
-const requestFCMPush =
-  (
-    navigator: Navigator,
-    setPushConfirmation: (pushConfirmation: () => void) => void
-  ) =>
-  async () => {
-    const permissionStatus = await navigator.permissions.query({
-      name: "notifications",
-    });
+interface PushConfirmation {
+  isModal: boolean;
+  callback: () => void;
+}
 
-    console.log("notifications permission status", permissionStatus.state);
-    if (permissionStatus.state === "prompt") {
-      await new Promise((resolve) => {
-        setPushConfirmation(() => resolve(null));
+const requestFCMPush = async (
+  navigator: Navigator,
+  setPushConfirmation: (pushConfirmation: PushConfirmation) => void
+) => {
+  const permissionStatus = await navigator.permissions.query({
+    name: "notifications",
+  });
+
+  console.log("notifications permission status", permissionStatus.state);
+  if (permissionStatus.state === "prompt") {
+    await new Promise((resolve) => {
+      setPushConfirmation({
+        isModal: true,
+        callback: () => resolve(null),
       });
-    }
-  };
-/*
-navigator.serviceWorker
-          .register("/service-worker.js")
-          .then(initializeNotification)
-          .then(() => {
-            console.log("Finished"); // TODO: Remove
-            resolve(true);
-          })
-          .catch((err) => {
-            console.error(err);
-            resolve(false);
-          });
-*/
+    });
+  }
+};
 
 export default function Index() {
   const { push } = useRouter();
   const context = useAppContext();
-
-  const [pushConfirmation, setPushConfirmation] =
-    useState<(() => void) | null>(null);
+  const [pushConfirmation, setPushConfirmation] = useState<PushConfirmation>({
+    isModal: false,
+    callback: () => {},
+  });
 
   useEffect(() => {
     Promise.all([
@@ -80,8 +74,30 @@ export default function Index() {
   return (
     <>
       <Splash />
-      {pushConfirmation && (
-        <div className="absolute bg-black inset-0 opacity-20">Hi</div>
+      {pushConfirmation.isModal && (
+        <>
+          <div
+            className={classNames("absolute bg-black inset-0 opacity-80")}
+          ></div>
+          <div className="absolute inset-0 flex">
+            <div className="bg-white m-auto px-6 py-4 rounded-md flex flex-col">
+              <p className="text-md">Notification permission is required.</p>
+              <div className="mt-2 self-end">
+                <button
+                  className="text-sm text-primary"
+                  onClick={() =>
+                    navigator.serviceWorker
+                      .register("/service-worker.js")
+                      .then(initializeNotification)
+                      .then(pushConfirmation.callback)
+                  }
+                >
+                  Enable
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </>
   );
