@@ -1,30 +1,43 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ParkingLotData } from "../../utils/types";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_TOKEN!;
 
 const MAP_CONTAINER_ID = "map-container";
 
-export default function Map() {
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: MAP_CONTAINER_ID,
-      style: "mapbox://styles/mapbox/streets-v11",
-    });
+interface MapProps {
+  parkingLots: ParkingLotData[];
+}
 
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      })
+export default function Map({ parkingLots }: MapProps) {
+  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+
+  useEffect(() => {
+    setMap(
+      new mapboxgl.Map({
+        container: MAP_CONTAINER_ID,
+        center: parkingLots[0]?.location || [0, 0],
+        style: "mapbox://styles/mapbox/streets-v11",
+        minZoom: 10,
+      }).addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          trackUserLocation: true,
+        })
+      )
     );
   }, []);
 
-  return (
-    <div id={MAP_CONTAINER_ID} className="w-full h-full">
-    </div>
-  );
+  useEffect(() => {
+    if (!map) return;
+    parkingLots.forEach(({ location }) =>
+      new mapboxgl.Marker().setLngLat(location).addTo(map)
+    );
+  }, [map, parkingLots]);
+
+  return <div id={MAP_CONTAINER_ID} className="w-full h-full"></div>;
 }
