@@ -12,6 +12,8 @@ export interface MainBackDropProps {
   className?: string;
   items: ParkingLotData[];
   mode?: BackdropModes;
+  currentParkingLot: ParkingLotData | null;
+  setCurrentParkingLot: (value: ParkingLotData | null) => void;
 }
 
 export enum BackdropModes {
@@ -23,6 +25,8 @@ export enum BackdropModes {
 const MainBackDrop: React.FC<MainBackDropProps> = ({
   items,
   className,
+  currentParkingLot,
+  setCurrentParkingLot,
   mode = BackdropModes.browsing,
 }) => {
   const [maxHeight, setMaxHeight] = useState<number>(600);
@@ -32,8 +36,8 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
   useEffect(() => {
     switch (mode) {
       case BackdropModes.detail:
-        setMaxHeight(120);
-        setMinHeight(120);
+        setMaxHeight(320);
+        setMinHeight(320);
         break;
       case BackdropModes.auth:
         setMaxHeight(window.innerHeight - 60);
@@ -67,13 +71,21 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
             <>
               <div className="h-3" />
               {items.map((data, index) => (
-                <ParkingLot key={index} {...data} isNearest={index == 0} isFaded={!isSearchExpanded && index !== 0}/>
+                <ParkingLot
+                  key={index}
+                  {...data}
+                  isNearest={index == 0}
+                  isFaded={!isSearchExpanded && index !== 0}
+                  onClick={() => setCurrentParkingLot(data)}
+                />
               ))}
               <SearchButton isExpanded={isSearchExpanded} />
             </>
           )}
           {mode === BackdropModes.auth && <AuthFlow />}
-          {mode === BackdropModes.detail && <ParkingLotDetail />}
+          {mode === BackdropModes.detail && (
+            <ParkingLotDetail currentParkingLot={currentParkingLot!} />
+          )}
         </Sheet.Content>
       </Sheet.Container>
       <Sheet.Backdrop />

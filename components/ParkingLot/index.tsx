@@ -39,10 +39,9 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
         { "opacity-20": isFaded },
         "overflow-hidden rounded transition-opacity duration-500"
       )}
-      onClick={onClick}
     >
       <Ripples color="rgba(0, 0, 0, .1)">
-        <div className="flex flex-row pr-6 pl-6 pt-3 pb-6">
+        <div className="flex flex-row pr-6 pl-6 pt-3 pb-6" onClick={onClick}>
           <div className="flex flex-col items-center justify-items-start pr-8">
             <p className=" text-5xl">{leftSeatCount}</p>
             <p className="text-sm font-normal opacity-40">left</p>
