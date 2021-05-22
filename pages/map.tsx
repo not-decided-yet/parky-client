@@ -8,10 +8,19 @@ const MAP_CONTAINER_ID = "map-container";
 
 export default function Map() {
   useEffect(() => {
-    var map = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: MAP_CONTAINER_ID,
       style: "mapbox://styles/mapbox/streets-v11",
     });
+
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
   }, []);
 
   return <div id={MAP_CONTAINER_ID} className="w-full h-screen"></div>;
