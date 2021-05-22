@@ -416,7 +416,7 @@ html {
 }
 
 .shining-effect {
-  background: linear-gradient(90deg, #0000, #fff2 50%, #0000 100%);
+  background: linear-gradient(90deg, #0000, #fff4 50%, #0000 100%);
   animation: roundtrip 5s alternate infinite;
 }
 

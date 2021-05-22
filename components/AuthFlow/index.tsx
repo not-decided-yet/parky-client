@@ -105,7 +105,8 @@ Vehicle.
     component: (setCurrentStep) => (
       <StepWrapper title={`Hoody!\nToday is your\nFirst **Parky** day.`}>
         <div className="w-full">
-          <img src="/img/auth-required.png" />
+          <img className="w-52 mx-auto" src="/img/car.png" />
+          <p className="text-xl text-center mb-6">AGT08899</p>
           <PrimaryButton
             onClick={() => {
               // TODO: push to reservation page
