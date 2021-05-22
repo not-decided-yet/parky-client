@@ -368,7 +368,7 @@ body {
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
 
-  @apply text-black bg-white font-sans;
+  @apply text-black bg-white font-sans font-bold;
 }
 
 html {
