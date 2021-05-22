@@ -11,16 +11,14 @@ export default async (req: NextApiRequest, res: NextApiResponse<KeyPair>) => {
   crypto.generateKeyPair(
     "rsa",
     {
-      modulusLength: 4096,
+      modulusLength: 2048,
       publicKeyEncoding: {
-        type: "spki",
+        type: "pkcs1",
         format: "pem",
       },
       privateKeyEncoding: {
-        type: "pkcs8",
+        type: "pkcs1",
         format: "pem",
-        cipher: "aes-256-cbc",
-        passphrase: "top secret",
       },
     },
     (err, publicKey, privateKey) => {
