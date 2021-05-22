@@ -13,22 +13,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MapBox parkingLots={dummyParkingLots} className="absolute"/>
-      <ParkingLotList items={dummyParkingLots} className="relative"/>
-      {/* <button
-          onClick={() => {
-            navigator.serviceWorker.register("/service-worker.js").then(
-              async (registration) => {
-                const token = await initializeNotification(registration);
-                await navigator.clipboard.writeText(token);
-                alert("Your token was copied");
-              },
-              (err) => console.error(err)
-            );
-          }}
-        >
-          request notification
-        </button> */}
+      <MapBox parkingLots={dummyParkingLots} className="absolute" />
+      <ParkingLotList items={dummyParkingLots} className="relative" />
     </div>
   );
 }
