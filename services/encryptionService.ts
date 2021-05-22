@@ -1,7 +1,8 @@
 import axios from "axios";
+import { KeyPair } from "../pages/api/keypair";
 
-export async function getUserPublicKey() {
-
+export async function getUserPublicKey(): Promise<KeyPair> {
+  return (await axios.get("/api/keypair")).data;
 }
 
 // --- --- --- ---
