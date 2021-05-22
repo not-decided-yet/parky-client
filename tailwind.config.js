@@ -14,5 +14,8 @@ module.exports = {
   variants: {
     extend: {},
   },
+  fontFamily: {
+    sans: ['Manrope', 'sans-serif'],
+  },
   plugins: [],
 }
