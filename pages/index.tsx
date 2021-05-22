@@ -65,9 +65,10 @@ export default function Index() {
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      push("/main");
-    }, 3000);
+    Promise.all([
+      requestGeolocation(navigator, context?.setLocation),
+      requestFCMPush(navigator, setPushConfirmation),
+    ]).then(() => push("/main"));
   }, []);
 
   return (
