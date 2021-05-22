@@ -2,12 +2,12 @@ import { ParkingLotData } from "../../utils/types";
 import ParkingLot from "../ParkingLot";
 import Sheet from "react-modal-sheet";
 import React, { useEffect, useState } from "react";
-import AuthFlow from "../AuthFlow";
 import ParkingLotDetail from "../ParkingLotDetail";
 
 import dynamic from "next/dynamic";
 
 const SearchButton = dynamic(() => import("../SearchButton"), { ssr: false });
+const AuthFlow = dynamic(() => import("../AuthFlow"), { ssr: false });
 export interface MainBackDropProps {
   className?: string;
   items: ParkingLotData[];
