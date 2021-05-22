@@ -1,6 +1,7 @@
 import { ParkingLotData } from "../../utils/types";
 import ParkingLot from "../ParkingLot";
 import Sheet from "react-modal-sheet";
+import { useEffect, useState } from "react";
 
 export interface ParkingLotListProps {
   className?: string;
@@ -11,35 +12,30 @@ const ParkingLotList: React.FC<ParkingLotListProps> = ({
   items,
   className,
 }) => {
+  const [maxHeight, setMaxHeight] = useState<number>(600);
+
+  useEffect(() => {
+    setMaxHeight(window.innerHeight - 60);
+  }, []);
   return (
     <Sheet
       isOpen={true}
       onClose={() => {}}
-      snapPoints={[600, 100]}
+      snapPoints={[maxHeight, 240]}
       initialSnap={1}
       className={`parking-lot-list ${className}`}
     >
       <Sheet.Container>
-        {/* <Sheet.Header /> */}
         <Sheet.Content>
+          <div className="h-3" />
           {items.map((data, index) => (
-            <ParkingLot key={index} {...data} />
+            <ParkingLot key={index} {...data} isNearest={index == 0} />
           ))}
         </Sheet.Content>
       </Sheet.Container>
 
       <Sheet.Backdrop />
     </Sheet>
-    // <BottomSheet
-    //   header={items.map((data, index) => (
-    //     <ParkingLot key={index} {...data} />
-    //   ))}
-    //   snapPoints={({ maxHeight }) => [maxHeight / 4, maxHeight * 0.8]}
-    //   open
-    //   className={classNames("bg-white", className)}
-    // >
-    //   <div />
-    // </BottomSheet>
   );
 };
 
