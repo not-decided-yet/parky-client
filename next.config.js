@@ -1,9 +1,5 @@
-const withPWA = require('next-pwa')
+const DumpVueEnvVarsWebpackPlugin = require("./config/DumpEnvsWebpackPlugin.js");
 
-module.exports = withPWA({
-  pwa: {
-    dest: 'public',
-    sw: 'service-worker.js',
-  },
-  distDir: 'build',
-});
+module.exports = {
+  distDir: "build",
+};

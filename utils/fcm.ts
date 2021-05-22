@@ -10,9 +10,9 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-firebase.initializeApp(firebaseConfig);
 
 async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRegistration) {
+  firebase.initializeApp(firebaseConfig);
   const result = await Notification.requestPermission();
   const messaging = firebase.messaging();
 
@@ -22,7 +22,6 @@ async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRe
     const token = await messaging.getToken({serviceWorkerRegistration});
 
     messaging.onMessage((payload) => console.log("onMessage", payload));
-    messaging.onBackgroundMessage((payload) => console.log("onBackgroundMessage", payload));
     return token;
   }
 }
