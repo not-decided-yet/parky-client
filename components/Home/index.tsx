@@ -12,7 +12,13 @@ const Home: React.FC = () => {
 
   const { currentParkingLot, setCurrentParkingLot } = useAppContext()!;
   useEffect(() => {
-    currentParkingLot && setBackdropMode(BackdropModes.detail);
+    if (currentParkingLot) {
+      backdropMode !== BackdropModes.detail &&
+        setBackdropMode(BackdropModes.detail);
+    } else {
+      backdropMode === BackdropModes.detail &&
+        setBackdropMode(BackdropModes.browsing);
+    }
   }, [currentParkingLot]);
 
   const context = useAppContext();

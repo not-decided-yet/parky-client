@@ -36,8 +36,8 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
   useEffect(() => {
     switch (mode) {
       case BackdropModes.detail:
-        setMaxHeight(320);
-        setMinHeight(320);
+        setMaxHeight(360);
+        setMinHeight(360);
         break;
       case BackdropModes.auth:
         setMaxHeight(window.innerHeight - 60);
@@ -46,6 +46,7 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
       default:
         setMaxHeight(window.innerHeight - 60);
         setMinHeight(240);
+        setCurrentParkingLot(null);
     }
   }, [mode]);
 
@@ -83,8 +84,11 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
             </>
           )}
           {mode === BackdropModes.auth && <AuthFlow />}
-          {mode === BackdropModes.detail && (
-            <ParkingLotDetail currentParkingLot={currentParkingLot!} />
+          {(mode === BackdropModes.detail) && currentParkingLot && (
+            <ParkingLotDetail
+              currentParkingLot={currentParkingLot}
+              resetCurrentParkingLot={() => setCurrentParkingLot(null)}
+            />
           )}
         </Sheet.Content>
       </Sheet.Container>

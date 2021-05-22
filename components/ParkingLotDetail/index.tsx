@@ -20,14 +20,19 @@ const ParkingLotMetric: React.FC<ParkingLotMetricProps> = ({
 
 interface ParkingLotDetailProps {
   currentParkingLot: ParkingLotData;
+  resetCurrentParkingLot: () => void;
 }
 
 const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
   currentParkingLot: { name },
+  resetCurrentParkingLot,
 }) => {
   /* TODO: customize ParkingLotMetric */
   return (
     <div className="p-6">
+      <span className="material-icons" onClick={resetCurrentParkingLot}>
+        arrow_back
+      </span>
       <h3 className="text-4xl mt-2">{name}</h3>
       <div className="flex flex-row justify-between mt-6">
         <ParkingLotMetric value="1.4km" description="Distance" />
