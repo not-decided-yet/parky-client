@@ -48,7 +48,6 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
       default:
         setMaxHeight(window.innerHeight - 60);
         setMinHeight(240);
-        setCurrentParkingLot(null);
     }
   }, [mode]);
 

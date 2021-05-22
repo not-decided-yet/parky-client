@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="absolute z-50">
+      {/* <div className="absolute z-50">
         <button onClick={() => setBackdropMode(BackdropModes.browsing)}>
           Browse
         </button>
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
         <button onClick={() => setBackdropMode(BackdropModes.detail)}>
           Detail
         </button>
-      </div>
+      </div> */}
       <MapBox
         parkingLots={dummyParkingLots}
         currentParkingLot={currentParkingLot}
