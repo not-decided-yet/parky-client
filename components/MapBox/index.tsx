@@ -88,7 +88,7 @@ const MapBox: React.FC<MapProps> = ({
           source: SOURCE_ID,
           layout: {
             "text-field": ["get", "name"],
-            "icon-text-fit": "both",
+            "icon-text-fit": "none",
             "icon-image": ["get", "image-name"],
             "icon-allow-overlap": true,
             "text-allow-overlap": true,

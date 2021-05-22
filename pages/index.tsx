@@ -57,7 +57,7 @@ const requestFCMPush = async (
 };
 
 export default function Index() {
-  const { push } = useRouter();
+  const { push, prefetch } = useRouter();
   const context = useAppContext();
   const [pushConfirmation, setPushConfirmation] = useState<PushConfirmation>({
     isModal: false,
@@ -65,6 +65,7 @@ export default function Index() {
   });
 
   useEffect(() => {
+    prefetch("/main");
     Promise.all([
       requestGeolocation(navigator, context?.setLocation),
       requestFCMPush(navigator, setPushConfirmation),
