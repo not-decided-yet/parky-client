@@ -1,3 +1,5 @@
+export type Coordinate = [number, number];    // [longitude, latitude] ([경도, 위도])
+
 export interface UserData {
 
 }

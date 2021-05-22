@@ -3,11 +3,14 @@ import Head from "next/head";
 import MapBox from "../components/MapBox";
 import MainBackdrop, { BackdropModes } from "../components/MainBackdrop";
 import dummyParkingLots from "../dummies/parkingLots";
+import { useAppContext } from "../context/state";
 
 export default function Home() {
   const [backdropMode, setBackdropMode] = useState<BackdropModes>(
     BackdropModes.browsing
   );
+
+  const context = useAppContext();
 
   return (
     <div className="relative">
@@ -27,7 +30,11 @@ export default function Home() {
           Detail
         </button>
       </div>
-      <MapBox parkingLots={dummyParkingLots} className="absolute" />
+      <MapBox
+        parkingLots={dummyParkingLots}
+        className="absolute"
+        defaultLocation={context!.location}
+      />
       <MainBackdrop
         items={dummyParkingLots}
         className="relative"

@@ -1,19 +1,26 @@
 import React, { createContext, useContext, useState } from "react";
-import { UserData } from "../utils/types";
+import { Coordinate, UserData } from "../utils/types";
+
+const DEFAULT_LOCATION: Coordinate = [-122.431297, 37.773972];  // San Francisco
 
 interface AppState {
   user?: UserData;
   setUser: (user?: UserData) => void;
+  location: Coordinate;
+  setLocation: (location: Coordinate) => void;
 }
 
 const AppContext = createContext<AppState | null>(null);
 
 export const AppWrapper: React.FC<{}> = ({ children }) => {
   const [user, setUser] = useState<UserData>();
+  const [location, setLocation] = useState<Coordinate>(DEFAULT_LOCATION);
 
   const sharedState: AppState = {
     user,
     setUser,
+    location,
+    setLocation,
   };
 
   return (
