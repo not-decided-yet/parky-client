@@ -15,12 +15,13 @@ const MapBox: React.FC<MapProps> = ({ parkingLots }) => {
   const [map, setMap] = useState<mapboxgl.Map>();
 
   useEffect(() => {
+    const firstParkingLot = parkingLots[0];
     setMap(
       new mapboxgl.Map({
         container: MAP_CONTAINER_ID,
-        center: parkingLots[0]?.location || [0, 0],
+        center: [firstParkingLot.longitude, firstParkingLot.latitude] || [0, 0],
         style: "mapbox://styles/mapbox/streets-v11",
-        minZoom: 10,
+        minZoom: 17,
       }).addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
@@ -34,12 +35,12 @@ const MapBox: React.FC<MapProps> = ({ parkingLots }) => {
 
   useEffect(() => {
     if (!map) return;
-    parkingLots.forEach(({ location }) =>
-      new mapboxgl.Marker().setLngLat(location).addTo(map)
+    parkingLots.forEach(({ longitude, latitude }) =>
+      new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map)
     );
   }, [map, parkingLots]);
 
-  return <div id={MAP_CONTAINER_ID} className="w-full h-full"></div>;
+  return <div id={MAP_CONTAINER_ID} className="w-screen h-screen"></div>;
 };
 
 export default MapBox;

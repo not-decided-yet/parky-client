@@ -5,13 +5,11 @@ export interface ParkingLotListProps {
   items: ParkingLotData[];
 }
 
-export default function ParkingLotList({
-  items,
-}: ParkingLotListProps) {
+export default function ParkingLotList({ items }: ParkingLotListProps) {
   return (
     <div>
       {items.map((data, index) => (
-        <ParkingLot key={index} data={data} />
+        <ParkingLot key={index} {...data} />
       ))}
     </div>
   );
