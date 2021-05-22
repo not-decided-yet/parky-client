@@ -1,9 +1,7 @@
 import { ParkingLotData } from "../../utils/types";
 
-interface ParkingLotProps {
-  data: ParkingLotData;
+const ParkingLot: React.FC<ParkingLotData> = ({ ...data }) => {
+  return <div>{data.name}</div>;
 }
 
-export default function ParkingLot({ data: { name } }: ParkingLotProps) {
-  return <div>{name}</div>;
-}
+export default ParkingLot;

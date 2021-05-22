@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Map from "../components/Map";
+import Map from "../components/MapBox";
 import ParkingLotList from "../components/ParkingLotList";
 import { ParkingLotData } from "../utils/types";
 
