@@ -28,14 +28,17 @@ const createMap = (defaultLocation: Coordinate) => {
     })
   );
 
-  ["marker_available", "marker_focus", "marker_unavailable"].forEach(
-    (imageName) => {
-      map.loadImage(
-        `/img/${imageName}.png`,
-        (err, image) => image && map.addImage(imageName, image)
-      );
-    }
-  );
+  [
+    { name: "marker_available" },
+    { name: "marker_focus", content: [20, 20, 75, 65] },
+    { name: "marker_unavailable" },
+  ].forEach(({ name: imageName, ...options }) => {
+    map.loadImage(
+      `/img/${imageName}.png`,
+      (err, image) => image && map.addImage(imageName, image, options)
+    );
+  });
+
   return map;
 };
 
@@ -53,9 +56,46 @@ const MapBox: React.FC<MapProps> = ({
 
   useEffect(() => {
     if (!map) return;
-    parkingLots.forEach(({ longitude, latitude }) =>
-      new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map)
-    );
+    parkingLots.forEach(({ longitude, latitude }, index) => {
+      const coord: Coordinate = [longitude, latitude];
+      // new mapboxgl.Marker().setLngLat(coord).addTo(map);
+
+      map.on("load", () => {
+        const SOURCE_ID = `test-source-name-${index}`;
+        map.addSource(SOURCE_ID, {
+          type: "geojson",
+          data: {
+            type: "FeatureCollection",
+            features: [
+              {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: coord,
+                },
+                properties: {
+                  "image-name": "marker_focus",
+                  name: "7",
+                },
+              },
+            ],
+          },
+        });
+
+        map.addLayer({
+          id: SOURCE_ID,
+          type: "symbol",
+          source: SOURCE_ID,
+          layout: {
+            "text-field": ["get", "name"],
+            "icon-text-fit": "both",
+            "icon-image": ["get", "image-name"],
+            "icon-allow-overlap": true,
+            "text-allow-overlap": true,
+          },
+        });
+      });
+    });
   }, [map, parkingLots]);
 
   return (
