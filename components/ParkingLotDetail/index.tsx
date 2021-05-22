@@ -39,7 +39,7 @@ const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
         <ParkingLotMetric value="$4/h" description="Fee" />
         <ParkingLotMetric value="32" description="Capacity" />
       </div>
-      <button className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8">
+      <button className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8 font-bold">
         Reserve
       </button>
     </div>
