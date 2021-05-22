@@ -8,19 +8,21 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_TOKEN!;
 const MAP_CONTAINER_ID = "map-container";
 
 interface MapProps {
+  className?: string;
   parkingLots: ParkingLotData[];
 }
 
-export default function Map({ parkingLots }: MapProps) {
-  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+const MapBox: React.FC<MapProps> = ({ parkingLots, className }) => {
+  const [map, setMap] = useState<mapboxgl.Map>();
 
   useEffect(() => {
+    const firstParkingLot = parkingLots[0];
     setMap(
       new mapboxgl.Map({
         container: MAP_CONTAINER_ID,
-        center: parkingLots[0]?.location || [0, 0],
+        center: [firstParkingLot.longitude, firstParkingLot.latitude] || [0, 0],
         style: "mapbox://styles/mapbox/streets-v11",
-        minZoom: 10,
+        minZoom: 17,
       }).addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
@@ -34,10 +36,16 @@ export default function Map({ parkingLots }: MapProps) {
 
   useEffect(() => {
     if (!map) return;
-    parkingLots.forEach(({ location }) =>
-      new mapboxgl.Marker().setLngLat(location).addTo(map)
+    parkingLots.forEach(({ longitude, latitude }) =>
+      new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map)
     );
   }, [map, parkingLots]);
 
-  return <div id={MAP_CONTAINER_ID} className="w-full h-full"></div>;
-}
+  return (
+    <div className={`w-screen h-screen z-0 ${className}`}>
+      <div id={MAP_CONTAINER_ID} className="w-full h-full" />
+    </div>
+  );
+};
+
+export default MapBox;

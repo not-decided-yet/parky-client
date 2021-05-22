@@ -3,6 +3,13 @@ export interface UserData {
 }
 
 export interface ParkingLotData {
-  name: string;
-  location: [number, number];
+  _id: string,
+  name: string,
+  longitude: number,
+  latitude: number,
+  is_free: boolean,
+  // TODO: Temporary this is string.
+  lots: string,
+  priority: string,
+  created_at: Date,
 }
