@@ -2,7 +2,7 @@ import { ParkingLotData } from "../utils/types";
 
 const dummyParkingLots: ParkingLotData[] = [
   {
-    _id: "",
+    _id: "1",
     name: "Union Square Parking",
     longitude: -122.41095490000001,
     latitude: 37.783797,
@@ -12,7 +12,7 @@ const dummyParkingLots: ParkingLotData[] = [
     created_at: new Date(),
   },
   {
-    _id: "",
+    _id: "2",
     name: "Union Square Parking2",
     longitude: -122.4100,
     latitude: 37.783792,
@@ -22,7 +22,7 @@ const dummyParkingLots: ParkingLotData[] = [
     created_at: new Date(),
   },
   {
-    _id: "",
+    _id: "3",
     name: "Union Square Parking3",
     longitude: -122.410953,
     latitude: 37.7835,

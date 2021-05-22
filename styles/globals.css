@@ -399,6 +399,7 @@ html {
 
 .parking-lot-list {
   pointer-events: none !important;
+  z-index: 10 !important;
 }
 
 #search-button-wrapper {
