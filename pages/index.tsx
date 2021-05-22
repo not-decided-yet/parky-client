@@ -1,13 +1,16 @@
 import { useRouter } from "next/dist/client/router";
 import { useEffect } from "react";
+import { Splash } from "../components/Splash";
 
-export default function Splash() {
+export default function Index() {
   const { push } = useRouter();
 
-  useEffect(() => {
-    setTimeout(() => {
-      push("/main");
-    }, 3000);
-  }, []);
-  return <div>권한 요청 로직 필요. 화면은 스플래시 화면</div>;
+  // useEffect(() => {
+  // return <div>권한 요청 로직 필요.</div>;45
+  //   setTimeout(() => {
+  //     push("/main");
+  //   }, 3000);
+  // }, []);
+
+  return <Splash />
 }
