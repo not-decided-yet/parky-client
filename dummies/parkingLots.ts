@@ -4,7 +4,7 @@ const dummyParkingLots: ParkingLotData[] = [
   {
     _id: "",
     name: "Union Square Parking",
-    longitude: 122.41095490000001,
+    longitude: -122.41095490000001,
     latitude: 37.783797,
     is_free: false,
     lots: "",
