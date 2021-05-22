@@ -2830,6 +2830,11 @@ modern-normalize@^1.0.0:
   resolved "https://registry.npmjs.org/modern-normalize/-/modern-normalize-1.1.0.tgz"
   integrity sha512-2lMlY1Yc1+CUy0gw4H95uNN7vjbpoED7NNRSBHE25nWfLBdmMzFCsPshlzbxHz+gYMcBEUN8V4pU16prcdPSgA==
 
+mounty@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/mounty/-/mounty-1.3.0.tgz#4c67cfd31fad7d68e526c4e29513f7d7f6d9924f"
+  integrity sha512-dj1s5R4Rao/pBL2vX+L99cwR0a2/4EE/SlCR2QtoOwbsYHzYIz+NkEh92L1AQEqeg6koDN/tzjGpfLTcvObAKQ==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
