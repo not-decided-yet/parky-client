@@ -1,9 +1,11 @@
 import { useMemo } from "react";
 import { ParkingLotData } from "../../utils/types";
 import Ripples from "react-ripples";
+import classNames from "classnames";
 
 interface ParkingLotProps extends ParkingLotData {
   isNearest?: boolean;
+  isFaded?: boolean;
   // TODO: 주차장 정보 눌렀을때에 대한 기능이 필요해요
   onClick?: React.MouseEventHandler;
 }
@@ -12,6 +14,7 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
   name,
   is_free: isFree,
   lots,
+  isFaded,
   isNearest = true,
   onClick,
 }) => {
@@ -31,7 +34,13 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
   }, [lots]);
 
   return (
-    <div className="overflow-hidden rounded" onClick={onClick}>
+    <div
+      className={classNames(
+        { "opacity-20": isFaded },
+        "overflow-hidden rounded transition-opacity duration-500"
+      )}
+      onClick={onClick}
+    >
       <Ripples color="rgba(0, 0, 0, .1)">
         <div className="flex flex-row pr-6 pl-6 pt-3 pb-6">
           <div className="flex flex-col items-center justify-items-start pr-8">

@@ -67,7 +67,7 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
             <>
               <div className="h-3" />
               {items.map((data, index) => (
-                <ParkingLot key={index} {...data} isNearest={index == 0} />
+                <ParkingLot key={index} {...data} isNearest={index == 0} isFaded={!isSearchExpanded && index !== 0}/>
               ))}
               <SearchButton isExpanded={isSearchExpanded} />
             </>
