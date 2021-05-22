@@ -393,6 +393,7 @@ html {
 .react-modal-sheet-container {
   pointer-events: all;
   border-radius: 0 40px 0 0 !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 -4px 10px !important;
 }
 
 .parking-lot-list {
