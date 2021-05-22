@@ -13,17 +13,12 @@ const firebaseConfig = {
 
 async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRegistration) {
   firebase.initializeApp(firebaseConfig);
-  const result = await Notification.requestPermission();
+
   const messaging = firebase.messaging();
-
-  if(result === 'denied' || result === 'default') {
-    return '';
-  } else {
-    const token = await messaging.getToken({serviceWorkerRegistration});
-
-    messaging.onMessage((payload) => console.log("onMessage", payload));
-    return token;
-  }
+  const token = await messaging.getToken({serviceWorkerRegistration});
+  console.log("token", token);
+  messaging.onMessage((payload) => console.log("onMessage", payload));
+  return token;
 }
 
 export default initializeNotification;
