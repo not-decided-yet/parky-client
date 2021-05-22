@@ -56,7 +56,7 @@ class MyDocument extends Document {
           <meta property="og:url" content="https://parky.ml" />
           <meta
             property="og:image"
-            content="https://parky.ml/icons/apple-touch-icon.png"
+            content="https://parky.ml/icons/og-image.png"
           />
 
           <link
