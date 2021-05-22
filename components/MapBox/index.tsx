@@ -7,7 +7,12 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_TOKEN!;
 
 const MAP_CONTAINER_ID = "map-container";
 
-const MARKER_RESOURCES = {
+interface MarkerProps {
+  "text-size": number,
+  "text-offset": number[],
+}
+
+const MARKER_RESOURCES: Record<string, MarkerProps> = {
   marker_available: {
     "text-size": 14,
     "text-offset": [0, -0.2],
@@ -91,7 +96,7 @@ const MapBox: React.FC<MapProps> = ({
         type: "geojson",
         data: {
           type: "FeatureCollection",
-          features: features, // @ts-ignore
+          features: features as any,
         },
       });
 
