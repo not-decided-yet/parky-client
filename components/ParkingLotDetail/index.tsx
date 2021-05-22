@@ -31,7 +31,8 @@ const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
   resetCurrentParkingLot,
   requestAuth,
 }) => {
-  const { user } = useAppContext() || {};
+  const { push } = useRouter();
+  const { isAuth } = useAppContext() || {};
 
   /* TODO: customize ParkingLotMetric */
   return (
@@ -48,10 +49,7 @@ const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
       <button
         className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8 font-bold"
         onClick={() => {
-          if (!user) {
-            requestAuth();
-            return;
-          }
+          isAuth ? push("/reservation") : requestAuth();
         }}
       >
         Reserve

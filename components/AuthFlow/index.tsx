@@ -8,6 +8,7 @@ import RegisterStatus from "./steps/RegisterStatus";
 import RegisterVehicleNo from "./steps/RegisterVehicleNo";
 import RegisterWaitingVehicle from "./steps/RegisterWaitingVehicle";
 import PrimaryButton from "../PrimaryButton";
+import RegisterFinished from "./steps/RegisterFinished";
 
 export enum CurrentStep {
   start,
@@ -104,17 +105,7 @@ Vehicle.
     step: CurrentStep.registerFinished,
     component: (setCurrentStep) => (
       <StepWrapper title={`Hoody!\nToday is your\nFirst **Parky** day.`}>
-        <div className="w-full">
-          <img className="w-52 mx-auto" src="/img/car.png" />
-          <p className="text-xl text-center mb-6">AGT08899</p>
-          <PrimaryButton
-            onClick={() => {
-              // TODO: push to reservation page
-            }}
-          >
-            Continue Reservation
-          </PrimaryButton>
-        </div>
+        <RegisterFinished />
       </StepWrapper>
     ),
   },

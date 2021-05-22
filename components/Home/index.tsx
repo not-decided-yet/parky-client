@@ -3,14 +3,13 @@ import { useAppContext } from "../../context/state";
 import dummyParkingLots from "../../dummies/parkingLots";
 import MainBackdrop, { BackdropModes } from "../MainBackdrop";
 import MapBox from "../MapBox";
-import { ParkingLotData } from "../../utils/types";
 
 const Home: React.FC = () => {
   const [backdropMode, setBackdropMode] = useState<BackdropModes>(
     BackdropModes.browsing
   );
 
-  const { currentParkingLot, setCurrentParkingLot } = useAppContext()!;
+  const { isAuth, currentParkingLot, setCurrentParkingLot } = useAppContext()!;
   useEffect(() => {
     if (currentParkingLot) {
       backdropMode !== BackdropModes.detail &&
@@ -20,6 +19,14 @@ const Home: React.FC = () => {
         setBackdropMode(BackdropModes.browsing);
     }
   }, [currentParkingLot]);
+
+  useEffect(() => {
+    isAuth &&
+      backdropMode === BackdropModes.auth &&
+      setBackdropMode(
+        currentParkingLot ? BackdropModes.detail : BackdropModes.browsing
+      );
+  }, [isAuth]);
 
   const context = useAppContext();
 

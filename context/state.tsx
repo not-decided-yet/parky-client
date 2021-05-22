@@ -7,8 +7,8 @@ import { Coordinate, ParkingLotData, UserData } from "../utils/types";
 const DEFAULT_LOCATION: Coordinate = [-122.410954, 37.78379];  // San Francisco
 
 interface AppState {
-  user?: UserData;
-  setUser: (user?: UserData) => void;
+  isAuth: boolean;
+  setAuth: (auth: boolean) => void;
   parkingLots: ParkingLotData[],
   location: Coordinate;
   setLocation: (location: Coordinate) => void;
@@ -20,15 +20,15 @@ interface AppState {
 const AppContext = createContext<AppState | null>(null);
 
 export const AppWrapper: React.FC<{}> = ({ children }) => {
-  const [user, setUser] = useState<UserData>();
+  const [isAuth, setAuth] = useState<boolean>(false);
   const [location, setLocation] = useState<Coordinate>(DEFAULT_LOCATION);
   const [currentParkingLot, setCurrentParkingLot] = useState<ParkingLotData | null>(null);
   const [parkingLots, setParkingLots] = useState<ParkingLotData[]>([]);
   const [keyPair, setKeyPair] = useState<KeyPair | null>(null);
 
   const sharedState: AppState = {
-    user,
-    setUser,
+    isAuth,
+    setAuth,
     location,
     setLocation,
     currentParkingLot,
