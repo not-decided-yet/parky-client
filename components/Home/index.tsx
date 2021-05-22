@@ -10,8 +10,7 @@ const Home: React.FC = () => {
     BackdropModes.browsing
   );
 
-  const [currentParkingLot, setCurrentParkingLot] =
-    useState<ParkingLotData | null>(null);
+  const { currentParkingLot, setCurrentParkingLot } = useAppContext()!;
   useEffect(() => {
     currentParkingLot && setBackdropMode(BackdropModes.detail);
   }, [currentParkingLot]);
@@ -33,6 +32,7 @@ const Home: React.FC = () => {
       </div>
       <MapBox
         parkingLots={dummyParkingLots}
+        currentParkingLot={currentParkingLot}
         className="absolute"
         defaultLocation={context!.location}
       />

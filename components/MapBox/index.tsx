@@ -8,8 +8,8 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_GL_TOKEN!;
 const MAP_CONTAINER_ID = "map-container";
 
 interface MarkerProps {
-  "text-size": number,
-  "text-offset": number[],
+  "text-size": number;
+  "text-offset": number[];
 }
 
 const MARKER_RESOURCES: Record<string, MarkerProps> = {
@@ -23,6 +23,7 @@ const MARKER_RESOURCES: Record<string, MarkerProps> = {
 
 interface MapProps {
   className?: string;
+  currentParkingLot: ParkingLotData | null;
   parkingLots: ParkingLotData[];
   defaultLocation: Coordinate;
 }
@@ -55,6 +56,7 @@ const createMap = (defaultLocation: Coordinate) => {
 
 const MapBox: React.FC<MapProps> = ({
   parkingLots,
+  currentParkingLot,
   className,
   defaultLocation,
 }) => {
@@ -66,13 +68,20 @@ const MapBox: React.FC<MapProps> = ({
   }, []);
 
   useEffect(() => {
+    currentParkingLot &&
+      map?.flyTo({
+        center: [currentParkingLot.longitude, currentParkingLot.latitude],
+      });
+  }, [currentParkingLot]);
+
+  useEffect(() => {
     if (!map) return;
     const features = parkingLots.map(({ longitude, latitude }, index) => {
       const markerType = [
         "marker_focus",
         "marker_unavailable",
         "marker_available",
-      ][index % 3];  // TODO: set using focus index & ...
+      ][index % 3]; // TODO: set using focus index & ...
 
       return {
         type: "Feature",
@@ -81,7 +90,7 @@ const MapBox: React.FC<MapProps> = ({
           coordinates: [longitude, latitude],
         },
         properties: {
-          name: "3",  // TODO: set available
+          name: "3", // TODO: set available
           "image-name": markerType,
           ...MARKER_RESOURCES[markerType],
         },

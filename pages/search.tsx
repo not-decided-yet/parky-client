@@ -4,8 +4,11 @@ import ParkingLot from "../components/ParkingLot";
 import { useAppContext } from "../context/state";
 import Link from "next/link";
 import { ParkingLotData } from "../utils/types";
+import { useRouter } from "next/dist/client/router";
 
 export default function Search() {
+  const { push } = useRouter();
+
   const [searchWord, setSearchWord] = useState<string | undefined>(undefined);
   const context = useAppContext();
   const foundParkingLots = useMemo<ParkingLotData[]>(() => {
@@ -16,7 +19,9 @@ export default function Search() {
     if (!searchWord) {
       return context.parkingLots;
     }
-    return context?.parkingLots.filter((lot) => lot.name.toLowerCase().includes(searchWord.toLowerCase()));
+    return context?.parkingLots.filter((lot) =>
+      lot.name.toLowerCase().includes(searchWord.toLowerCase())
+    );
   }, [context?.parkingLots, searchWord]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,9 +55,16 @@ export default function Search() {
       </div>
       <div className="bg-white flex-1 h-full w-full rounded-r-3xl">
         <div className="h-4" />
-        {(foundParkingLots.length > 0) ? (
+        {foundParkingLots.length > 0 ? (
           foundParkingLots.map((data) => (
-            <ParkingLot key={data._id} {...data} />
+            <ParkingLot
+              key={data._id}
+              {...data}
+              onClick={() => {
+                context?.setCurrentParkingLot(data);
+                push("/main")
+              }}
+            />
           ))
         ) : (
           <div className="h-full w-full flex items-center self-center">

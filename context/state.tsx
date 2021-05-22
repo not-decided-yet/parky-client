@@ -10,6 +10,8 @@ interface AppState {
   parkingLots: ParkingLotData[],
   location: Coordinate;
   setLocation: (location: Coordinate) => void;
+  currentParkingLot: ParkingLotData | null;
+  setCurrentParkingLot: (value: (ParkingLotData | null)) => void;
 }
 
 const AppContext = createContext<AppState | null>(null);
@@ -17,6 +19,7 @@ const AppContext = createContext<AppState | null>(null);
 export const AppWrapper: React.FC<{}> = ({ children }) => {
   const [user, setUser] = useState<UserData>();
   const [location, setLocation] = useState<Coordinate>(DEFAULT_LOCATION);
+  const [currentParkingLot, setCurrentParkingLot] = useState<ParkingLotData | null>(null);
   const [parkingLots, setParkingLots] = useState<ParkingLotData[]>([]);
 
   const sharedState: AppState = {
@@ -24,6 +27,8 @@ export const AppWrapper: React.FC<{}> = ({ children }) => {
     setUser,
     location,
     setLocation,
+    currentParkingLot,
+    setCurrentParkingLot,
     parkingLots,
   };
 
