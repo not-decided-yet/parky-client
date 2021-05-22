@@ -13,6 +13,32 @@ interface MapProps {
   defaultLocation: Coordinate;
 }
 
+const createMap = (defaultLocation: Coordinate) => {
+  const map = new mapboxgl.Map({
+    container: MAP_CONTAINER_ID,
+    center: defaultLocation,
+    style: "mapbox://styles/mapbox/streets-v11",
+    minZoom: 17,
+  }).addControl(
+    new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true,
+      },
+      trackUserLocation: true,
+    })
+  );
+
+  ["marker_available", "marker_focus", "marker_unavailable"].forEach(
+    (imageName) => {
+      map.loadImage(
+        `/img/${imageName}.png`,
+        (err, image) => image && map.addImage(imageName, image)
+      );
+    }
+  );
+  return map;
+};
+
 const MapBox: React.FC<MapProps> = ({
   parkingLots,
   className,
@@ -22,22 +48,7 @@ const MapBox: React.FC<MapProps> = ({
 
   useEffect(() => {
     // const firstParkingLot = parkingLots[0];
-    console.log(defaultLocation);
-    setMap(
-      new mapboxgl.Map({
-        container: MAP_CONTAINER_ID,
-        center: defaultLocation,
-        style: "mapbox://styles/mapbox/streets-v11",
-        minZoom: 17,
-      }).addControl(
-        new mapboxgl.GeolocateControl({
-          positionOptions: {
-            enableHighAccuracy: true,
-          },
-          trackUserLocation: true,
-        })
-      )
-    );
+    setMap(createMap(defaultLocation));
   }, []);
 
   useEffect(() => {

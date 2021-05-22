@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { Coordinate, UserData } from "../utils/types";
 
-const DEFAULT_LOCATION: Coordinate = [-122.431297, 37.773972];  // San Francisco
+const DEFAULT_LOCATION: Coordinate = [-122.410954, 37.78379];  // San Francisco
 
 interface AppState {
   user?: UserData;
