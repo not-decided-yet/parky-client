@@ -11,7 +11,8 @@ const AuthFlow = dynamic(() => import("../AuthFlow"), { ssr: false });
 export interface MainBackDropProps {
   className?: string;
   items: ParkingLotData[];
-  mode?: BackdropModes;
+  mode: BackdropModes;
+  setMode: (mode: BackdropModes) => void;
   currentParkingLot: ParkingLotData | null;
   setCurrentParkingLot: (value: ParkingLotData | null) => void;
 }
@@ -27,7 +28,8 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
   className,
   currentParkingLot,
   setCurrentParkingLot,
-  mode = BackdropModes.browsing,
+  mode,
+  setMode,
 }) => {
   const [maxHeight, setMaxHeight] = useState<number>(600);
   const [minHeight, setMinHeight] = useState<number>(240);
@@ -88,6 +90,7 @@ const MainBackDrop: React.FC<MainBackDropProps> = ({
             <ParkingLotDetail
               currentParkingLot={currentParkingLot}
               resetCurrentParkingLot={() => setCurrentParkingLot(null)}
+              requestAuth={() => setMode(BackdropModes.auth)}
             />
           )}
         </Sheet.Content>

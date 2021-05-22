@@ -1,4 +1,6 @@
+import { useRouter } from "next/dist/client/router";
 import React from "react";
+import { useAppContext } from "../../context/state";
 import { ParkingLotData } from "../../utils/types";
 
 interface ParkingLotMetricProps {
@@ -21,12 +23,16 @@ const ParkingLotMetric: React.FC<ParkingLotMetricProps> = ({
 interface ParkingLotDetailProps {
   currentParkingLot: ParkingLotData;
   resetCurrentParkingLot: () => void;
+  requestAuth: () => void;
 }
 
 const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
   currentParkingLot: { name },
   resetCurrentParkingLot,
+  requestAuth,
 }) => {
+  const { user } = useAppContext() || {};
+
   /* TODO: customize ParkingLotMetric */
   return (
     <div className="p-6">
@@ -39,7 +45,15 @@ const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
         <ParkingLotMetric value="$4/h" description="Fee" />
         <ParkingLotMetric value="32" description="Capacity" />
       </div>
-      <button className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8 font-bold">
+      <button
+        className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8 font-bold"
+        onClick={() => {
+          if (!user) {
+            requestAuth();
+            return;
+          }
+        }}
+      >
         Reserve
       </button>
     </div>

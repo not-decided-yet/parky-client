@@ -7,6 +7,7 @@ const PrimaryButton: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
 }) => {
   return (
     <button
+      disabled={disabled}
       className={classNames(
         disabled
           ? "bg-gray-200 text-opacity-20 text-black"

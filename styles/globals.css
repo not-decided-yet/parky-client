@@ -13,7 +13,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -179,7 +179,8 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -189,7 +190,8 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
+select {
+  /* 1 */
   text-transform: none;
 }
 
@@ -411,4 +413,17 @@ html {
   display: flex;
   justify-content: flex-end;
   pointer-events: none;
+}
+
+.shining-effect {
+  background: linear-gradient(90deg, #0000, #fff2 50%, #0000 100%);
+  animation: roundtrip 5s alternate infinite;
+}
+
+@keyframes roundtrip {
+  from {
+  }
+  to {
+    transform: translateX(50vw);
+  }
 }

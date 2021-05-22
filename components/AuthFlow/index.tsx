@@ -3,6 +3,10 @@ import { Mounty } from "mounty";
 import classNames from "classnames";
 import StepWrapper from "./StepWrapper";
 import StartStep from "./steps/Start";
+import RegisterAccount from "./steps/RegisterAccount";
+import RegisterStatus from "./steps/RegisterStatus";
+import RegisterVehicleNo from "./steps/RegisterVehicleNo";
+import RegisterWaitingVehicle from "./steps/RegisterWaitingVehicle";
 import PrimaryButton from "../PrimaryButton";
 
 export enum CurrentStep {
@@ -45,15 +49,9 @@ Let me know
 Your **Status.**
 `}
       >
-        <div>
-          registerStatus
-          <button onClick={() => setCurrentStep(CurrentStep.start)}>
-            Back
-          </button>
-          <button onClick={() => setCurrentStep(CurrentStep.registerAccount)}>
-            Next
-          </button>
-        </div>
+        <RegisterStatus
+          goNext={() => setCurrentStep(CurrentStep.registerAccount)}
+        />
       </StepWrapper>
     ),
   },
@@ -66,12 +64,9 @@ Let me know
 Your **Account.**
 `}
       >
-        <div className="w-full">
-          registerAccount
-          <PrimaryButton onClick={() => setCurrentStep(CurrentStep.registerVehicleNo)}>
-            Next
-          </PrimaryButton>
-        </div>
+        <RegisterAccount
+          goNext={() => setCurrentStep(CurrentStep.registerVehicleNo)}
+        />
       </StepWrapper>
     ),
   },
@@ -84,14 +79,9 @@ Let me know
 Your **Vehicle No.**
 `}
       >
-        <div className="w-full">
-          registerAccount
-          <PrimaryButton
-            onClick={() => setCurrentStep(CurrentStep.registerWaitingVehicle)}
-          >
-            Next
-          </PrimaryButton>
-        </div>
+        <RegisterVehicleNo
+          goNext={() => setCurrentStep(CurrentStep.registerWaitingVehicle)}
+        />
       </StepWrapper>
     ),
   },
@@ -104,18 +94,28 @@ Your **Vehicle No.**
 Vehicle.
 `}
       >
-        <div>
-          registerAccount
-          <button onClick={() => setCurrentStep(CurrentStep.registerFinished)}>
-            Next
-          </button>
-        </div>
+        <RegisterWaitingVehicle
+          goNext={() => setCurrentStep(CurrentStep.registerFinished)}
+        />
       </StepWrapper>
     ),
   },
   {
     step: CurrentStep.registerFinished,
-    component: (setCurrentStep) => <div>registerFinished</div>,
+    component: (setCurrentStep) => (
+      <StepWrapper title={`Hoody!\nToday is your\nFirst **Parky** day.`}>
+        <div className="w-full">
+          <img src="/img/auth-required.png" />
+          <PrimaryButton
+            onClick={() => {
+              // TODO: push to reservation page
+            }}
+          >
+            Continue Reservation
+          </PrimaryButton>
+        </div>
+      </StepWrapper>
+    ),
   },
 ];
 

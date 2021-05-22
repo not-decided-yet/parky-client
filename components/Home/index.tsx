@@ -46,6 +46,7 @@ const Home: React.FC = () => {
         items={dummyParkingLots}
         className="relative"
         mode={backdropMode}
+        setMode={setBackdropMode}
         currentParkingLot={currentParkingLot}
         setCurrentParkingLot={setCurrentParkingLot}
       />
