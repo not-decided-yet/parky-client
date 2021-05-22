@@ -427,3 +427,7 @@ html {
     transform: translateX(50vw);
   }
 }
+
+.min-w-50p {
+  min-width: 50%;
+}
