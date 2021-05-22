@@ -1,20 +1,13 @@
-import React from "react";
-import Head from "next/head";
-import MapBox from "../components/MapBox";
-import ParkingLotList from "../components/ParkingLotList";
-import dummyParkingLots from "../dummies/parkingLots";
+import { useRouter } from "next/dist/client/router";
+import { useEffect } from "react";
 
-export default function Home() {
-  return (
-    <div className="relative">
-      <Head>
-        <title>Parky</title>
-        <meta name="description" content="It's a Parky day!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+export default function Splash() {
+  const { push } = useRouter();
 
-      <MapBox parkingLots={dummyParkingLots} className="absolute" />
-      <ParkingLotList items={dummyParkingLots} className="relative" />
-    </div>
-  );
+  useEffect(() => {
+    setTimeout(() => {
+      push("/main");
+    }, 3000);
+  }, []);
+  return <div>권한 요청 로직 필요. 화면은 스플래시 화면</div>;
 }
