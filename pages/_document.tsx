@@ -39,11 +39,6 @@ class MyDocument extends Document {
           />
           <link
             rel="apple-touch-icon"
-            sizes="180x180"
-            href="/static/icons/touch-icon-iphone-retina.png"
-          />
-          <link
-            rel="apple-touch-icon"
             sizes="167x167"
             href="/static/icons/touch-icon-ipad-retina.png"
           />
