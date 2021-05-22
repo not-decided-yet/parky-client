@@ -15,7 +15,7 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
   is_free: isFree,
   lots,
   isFaded,
-  isNearest = true,
+  isNearest = false,
   onClick,
 }) => {
   const leftSeatCount = useMemo<number>(() => {
