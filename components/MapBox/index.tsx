@@ -11,8 +11,8 @@ interface MapProps {
   parkingLots: ParkingLotData[];
 }
 
-export default function Map({ parkingLots }: MapProps) {
-  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+const MapBox: React.FC<MapProps> = ({ parkingLots }) => {
+  const [map, setMap] = useState<mapboxgl.Map>();
 
   useEffect(() => {
     setMap(
@@ -40,4 +40,6 @@ export default function Map({ parkingLots }: MapProps) {
   }, [map, parkingLots]);
 
   return <div id={MAP_CONTAINER_ID} className="w-full h-full"></div>;
-}
+};
+
+export default MapBox;
