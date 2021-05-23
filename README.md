@@ -20,10 +20,10 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 ### Using Docker
 
 ```sh
-$ docker build -t parky-client .
+$ docker build -t parky-client --build-arg ENV_JS="$(cat public/env.js)" .
 Sending build context to Docker daemon  11.71MB
 Step 1/8 : FROM node:16.2.0
 ...
 
-$ docker run -d -p 3000:3000 -v `pwd`/.env.local:/app/.env.local parky-client
+$ docker run -d -p 80:3000 -v `pwd`/.env.local:/app/.env.local -v `pwd`/public/env.js:/app/public/env.js parky-client
 ```

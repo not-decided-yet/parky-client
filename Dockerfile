@@ -7,9 +7,4 @@ RUN yarn install --pure-lockfile
 
 COPY . .
 
-ARG ENV_JS
-RUN echo ${ENV_JS} > /app/public/env.js
-
-RUN yarn build
-
-ENTRYPOINT ["yarn", "start"]
+ENTRYPOINT ["sh", "-c", "yarn build && yarn start"]
