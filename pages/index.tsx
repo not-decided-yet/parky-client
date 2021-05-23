@@ -73,6 +73,7 @@ export default function Index() {
     Promise.all([
       requestGeolocation(navigator, context?.setLocation),
       requestFCMPush(navigator, setPushConfirmation),
+      new Promise((resolve) => setTimeout(resolve, 1000)),
     ]).then(() => push("/main"));
   }, []);
 
