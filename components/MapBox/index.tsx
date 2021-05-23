@@ -70,7 +70,7 @@ const MapBox: React.FC<MapProps> = ({
   useEffect(() => {
     currentParkingLot &&
       map?.flyTo({
-        center: [currentParkingLot.longitude, currentParkingLot.latitude],
+        center: [currentParkingLot.longitude, currentParkingLot.latitude - 0.0005],
       });
   }, [currentParkingLot]);
 
