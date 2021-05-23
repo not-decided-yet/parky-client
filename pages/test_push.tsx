@@ -1,6 +1,4 @@
-import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "../context/state";
 import initializeNotification from "../utils/fcm";
 
 export default function TestPush() {

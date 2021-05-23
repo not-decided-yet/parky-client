@@ -14,4 +14,7 @@ export interface ParkingLotData {
   lots: string,
   priority: string,
   created_at: Date,
+  leftSeat?: number,
+  distance?: string,
+  capacity?: number,
 }

@@ -27,7 +27,7 @@ interface ParkingLotDetailProps {
 }
 
 const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
-  currentParkingLot: { name },
+  currentParkingLot: { name, distance, capacity },
   resetCurrentParkingLot,
   requestAuth,
 }) => {
@@ -42,9 +42,9 @@ const ParkingLotDetail: React.FC<ParkingLotDetailProps> = ({
       </span>
       <h3 className="text-4xl mt-2">{name}</h3>
       <div className="flex flex-row justify-between mt-6">
-        <ParkingLotMetric value="1.4km" description="Distance" />
+        <ParkingLotMetric value={distance || "1.4km"} description="Distance" />
         <ParkingLotMetric value="$4/h" description="Fee" />
-        <ParkingLotMetric value="32" description="Capacity" />
+        <ParkingLotMetric value={String(capacity) || "32"} description="Capacity" />
       </div>
       <button
         className="bg-primary text-xl text-white rounded-3xl w-full py-2 shadow-md mt-8 font-bold"

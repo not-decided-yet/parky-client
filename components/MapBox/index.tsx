@@ -33,7 +33,7 @@ const createMap = (defaultLocation: Coordinate) => {
     container: MAP_CONTAINER_ID,
     center: defaultLocation,
     style: "mapbox://styles/mapbox/streets-v11",
-    minZoom: 17,
+    minZoom: 15,
   }).addControl(
     new mapboxgl.GeolocateControl({
       positionOptions: {
@@ -70,32 +70,39 @@ const MapBox: React.FC<MapProps> = ({
   useEffect(() => {
     currentParkingLot &&
       map?.flyTo({
-        center: [currentParkingLot.longitude, currentParkingLot.latitude - 0.0005],
+        center: [
+          currentParkingLot.longitude,
+          currentParkingLot.latitude - 0.0008,
+        ],
       });
   }, [currentParkingLot]);
 
   useEffect(() => {
     if (!map) return;
-    const features = parkingLots.map(({ longitude, latitude }, index) => {
-      const markerType = [
-        "marker_focus",
-        "marker_unavailable",
-        "marker_available",
-      ][index % 3]; // TODO: set using focus index & ...
+    const features = parkingLots.map(
+      ({ longitude, latitude, leftSeat }, index) => {
+        const markerType =
+          leftSeat === 0
+            ? "marker_unavailable"
+            : index === 0
+            ? "marker_focus"
+            : "marker_available";
+        // TODO: set using focus index & ...
 
-      return {
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [longitude, latitude],
-        },
-        properties: {
-          name: "3", // TODO: set available
-          "image-name": markerType,
-          ...MARKER_RESOURCES[markerType],
-        },
-      };
-    });
+        return {
+          type: "Feature",
+          geometry: {
+            type: "Point",
+            coordinates: [longitude, latitude],
+          },
+          properties: {
+            name: String(leftSeat) || "0",
+            "image-name": markerType,
+            ...MARKER_RESOURCES[markerType],
+          },
+        };
+      }
+    );
 
     // new mapboxgl.Marker().setLngLat(coord).addTo(map);
     map.on("load", () => {

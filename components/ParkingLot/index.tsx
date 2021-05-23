@@ -16,21 +16,24 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
   lots,
   isFaded,
   isNearest = false,
+  leftSeat,
+  distance,
+  capacity,
   onClick,
 }) => {
   const leftSeatCount = useMemo<number>(() => {
     // TODO: 남은 주차 갯수 직접 계산해야함
-    return 3;
+    return leftSeat === undefined ? 3 : leftSeat;
   }, [lots]);
 
-  const distance = useMemo<string>(() => {
+  const distanceFromHere = useMemo<string>(() => {
     // TODO: 주차장 위치 기반으로 거리 계산 해주세여
-    return "1.4km";
+    return distance || "1.4km";
   }, [lots]);
 
   const maxCapacity = useMemo<number>(() => {
     // TODO: 최대 주차 대수 계산해주세여
-    return 24;
+    return capacity || 24;
   }, [lots]);
 
   return (
@@ -52,7 +55,7 @@ const ParkingLot: React.FC<ParkingLotProps> = ({
             )}
             <p className="text-3xl">{name}</p>
             <div className="flex flex-row mt-3">
-              <p className="text-sm font-normal mr-4">{distance}</p>
+              <p className="text-sm font-normal mr-4">{distanceFromHere}</p>
               <p className="text-sm font-normal mr-4">
                 {isFree ? "Free" : "Paid"}
               </p>
