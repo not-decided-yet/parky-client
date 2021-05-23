@@ -5,9 +5,7 @@ WORKDIR /app
 COPY ["package*.json", "yarn.lock", "/app/"]
 RUN yarn install --pure-lockfile
 
-ARG ENV_LOCAL
-RUN echo ${ENV_LOCAL} > .env.local
-
+COPY . .
 RUN yarn build
 
 ENTRYPOINT yarn serve
