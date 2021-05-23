@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/messaging';
+import firebase from "firebase/app";
+import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,23 +10,26 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-
-async function initializeNotification(serviceWorkerRegistration: ServiceWorkerRegistration) {
+async function initializeNotification(
+  serviceWorkerRegistration: ServiceWorkerRegistration,
+  onMessage: () => void = () => {}
+) {
   firebase.initializeApp(firebaseConfig);
 
   const messaging = firebase.messaging();
-  const token = await messaging.getToken({serviceWorkerRegistration});
+  const token = await messaging.getToken({ serviceWorkerRegistration });
   console.log("token", token);
-  navigator.clipboard.writeText(token);
-  alert(`'무야호 ${token}'`);
+
   messaging.onMessage((payload) => {
     console.log("onMessage", payload);
-    serviceWorkerRegistration.showNotification(payload.notification.title,
-      {
-        body: payload.notification.body,
-        icon: payload.notification.image,
-      });
+    /*
+    serviceWorkerRegistration.showNotification(payload.notification.title, {
+      body: payload.notification.body,
+      icon: payload.notification.image,
+    });
+    */
   });
+  messaging.onMessage(onMessage);
   return token;
 }
 

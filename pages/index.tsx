@@ -39,14 +39,18 @@ interface PushConfirmation {
 
 const requestFCMPush = async (
   navigator: Navigator,
-  setPushConfirmation: (pushConfirmation: PushConfirmation) => void
+  setPushConfirmation: (pushConfirmation: PushConfirmation) => void,
 ) => {
   const permissionStatus = await navigator.permissions.query({
     name: "notifications",
   });
 
   console.log("notifications permission status", permissionStatus.state);
-  if (permissionStatus.state === "prompt") {
+  if (permissionStatus.state === "granted") {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then(initializeNotification);
+  } else if (permissionStatus.state === "prompt") {
     await new Promise((resolve) => {
       setPushConfirmation({
         isModal: true,

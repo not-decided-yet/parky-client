@@ -1,0 +1,6 @@
+.next
+.vscode
+build
+node_modules
+out
+.env.local
